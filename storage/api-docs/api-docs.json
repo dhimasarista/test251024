@@ -1,0 +1,260 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API",
+        "version": "0.1"
+    },
+    "paths": {
+        "api/approval-stages": {
+            "post": {
+                "tags": [
+                    "Approval Stages"
+                ],
+                "summary": "Tambah tahap approval",
+                "operationId": "11332fc3263a345c5b469585ee99ed34",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approver_id": {
+                                        "description": "tersedia di tabel approvers, unik satu sama lain",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tahap approval berhasil ditambahkan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "api/approval-stages/{id}": {
+            "patch": {
+                "tags": [
+                    "Approval Stages"
+                ],
+                "summary": "Ubah tahap approval",
+                "operationId": "93429abc06eebcd0204552486ab393fb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID tahap approval",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approver_id": {
+                                        "description": "tersedia di tabel approvers, unik satu sama lain",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tahap approval berhasil diubah"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "api/approvers": {
+            "post": {
+                "tags": [
+                    "Approvers"
+                ],
+                "summary": "Tambah approver",
+                "operationId": "20c1d94567b998ea6e551dd561905f2f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Ana"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Approver ditambahkan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Ana"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "api/expenses": {
+            "post": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Tambah pengeluaran",
+                "operationId": "055acd698fcfe0e7df065ac8adf4b6db",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "description": "Jumlah pengeluaran",
+                                        "type": "number"
+                                    },
+                                    "description": {
+                                        "description": "Deskripsi pengeluaran",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pengeluaran berhasil ditambahkan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "api/expenses/{id}/approve": {
+            "patch": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Setujui pengeluaran",
+                "operationId": "0cf55fafe2e75a4be27dd257cf36ee17",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID pengeluaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approved_by": {
+                                        "description": "ID yang menyetujui pengeluaran",
+                                        "type": "integer"
+                                    },
+                                    "approval_note": {
+                                        "description": "Catatan approval",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pengeluaran berhasil disetujui"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "api/expenses/{id}": {
+            "get": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Ambil pengeluaran",
+                "operationId": "533974a27001e413a87cce8149f97981",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID pengeluaran",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pengeluaran ditemukan"
+                    },
+                    "404": {
+                        "description": "Pengeluaran tidak ditemukan"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Approval Stages",
+            "description": "Approval Stages"
+        },
+        {
+            "name": "Approvers",
+            "description": "Approvers"
+        },
+        {
+            "name": "Expenses",
+            "description": "Expenses"
+        }
+    ]
+}
