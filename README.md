@@ -7,6 +7,10 @@
 - **Laravel** >= 11
 - **MySQL**
 
+> **Berhasil Jalan di Windows 11 dan Ubuntu 22.04**
+
+![1729837720670](image/README/1729837720670.png)
+
 ## Instalasi
 
 1. **Install Dependencies**
