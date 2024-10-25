@@ -34,8 +34,14 @@ class ApprovalStageController extends Controller
      */
     public function store(StoreApprovalStageRequest $request): JsonResponse
     {
-        $approvalStage = $this->approvalStageService->createApprovalStage($request->validated());
-        return response()->json($approvalStage, 201);
+        try {
+            $approvalStage = $this->approvalStageService->createApprovalStage($request->validated());
+            return response()->json($approvalStage, 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                "message" => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -63,7 +69,13 @@ class ApprovalStageController extends Controller
      */
     public function update(UpdateApprovalStageRequest $request, $id): JsonResponse
     {
-        $approvalStage = $this->approvalStageService->updateApprovalStage($id, $request->validated());
-        return response()->json($approvalStage, 200);
+        try {
+            $approvalStage = $this->approvalStageService->updateApprovalStage($id, $request->validated());
+            return response()->json($approvalStage, 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                "message" => $e->getMessage(),
+            ], 500);
+        }
     }
 }

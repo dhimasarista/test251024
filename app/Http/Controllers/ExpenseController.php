@@ -26,7 +26,7 @@ class ExpenseController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *             type="object",
-     *             @OA\Property(property="amount", type="number", description="Jumlah pengeluaran"),
+     *             @OA\Property(property="amount", type="number", description="Jumlah pengeluaran dengan minimal value 1"),
      *         )
      *     ),
      *     @OA\Response(response=201, description="Pengeluaran berhasil ditambahkan"),
@@ -35,8 +35,14 @@ class ExpenseController extends Controller
      */
     public function store(StoreExpenseRequest $request): JsonResponse
     {
-        $expense = $this->expenseService->createExpense($request->validated());
-        return response()->json($expense, 201);
+        try {
+            $expense = $this->expenseService->createExpense($request->validated());
+            return response()->json($expense, 201);
+        } catch (Exception $e) {
+            return response()->json([
+                "message" => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
