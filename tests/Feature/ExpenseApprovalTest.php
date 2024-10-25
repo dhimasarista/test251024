@@ -48,7 +48,7 @@ class ExpenseApprovalTest extends TestCase
 
         // 5.1 Pengeluaran Pertama - Disetujui Semua
         foreach ($approverIds as $approverId) {
-            $this->putJson("/api/expenses/{$expenses[0]}/approve", [
+            $this->patchJson("/api/expenses/{$expenses[0]}/approve", [
                 'approver_id' => $approverId,
             ])->assertStatus(200);
         }
@@ -61,7 +61,7 @@ class ExpenseApprovalTest extends TestCase
 
         // 5.2 Pengeluaran Kedua - Disetujui 2 approver
         foreach (array_slice($approverIds, 0, 2) as $approverId) {
-            $this->putJson("/api/expenses/{$expenses[1]}/approve", [
+            $this->patchJson("/api/expenses/{$expenses[1]}/approve", [
                 'approver_id' => $approverId,
             ])->assertStatus(200);
         }
@@ -73,7 +73,7 @@ class ExpenseApprovalTest extends TestCase
             ]);
 
         // 5.3 Pengeluaran Ketiga - Disetujui 1 approver
-        $this->putJson("/api/expenses/{$expenses[2]}/approve", [
+        $this->patchJson("/api/expenses/{$expenses[2]}/approve", [
             'approver_id' => $approverIds[0],
         ])->assertStatus(200);
         // Pastikan status pengeluarannya masih menunggu persetujuan

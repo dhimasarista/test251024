@@ -37,7 +37,7 @@ Route::put('/approval-stages/{id}', [ApprovalStageController::class, 'update'])
 Route::post('/expenses', [ExpenseController::class, 'store'])
     ->name('expenses.store'); // Tambah pengeluaran
 
-Route::put('/expenses/{id}/approve', [ExpenseController::class, 'approveExpense'])
+Route::patch('/expenses/{id}/approve', [ExpenseController::class, 'approveExpense'])
     ->name('expenses.approve'); // Setujui pengeluaran
 
 Route::get('/expenses/{id}', [ExpenseController::class, 'show'])
