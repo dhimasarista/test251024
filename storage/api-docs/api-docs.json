@@ -5,13 +5,13 @@
         "version": "0.1"
     },
     "paths": {
-        "api/approval-stages": {
+        "/approval-stages": {
             "post": {
                 "tags": [
                     "Approval Stages"
                 ],
                 "summary": "Tambah tahap approval",
-                "operationId": "11332fc3263a345c5b469585ee99ed34",
+                "operationId": "131fda46f87a1abfd3b19e563547a42c",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -38,13 +38,13 @@
                 }
             }
         },
-        "api/approval-stages/{id}": {
+        "/approval-stages/{id}": {
             "patch": {
                 "tags": [
                     "Approval Stages"
                 ],
                 "summary": "Ubah tahap approval",
-                "operationId": "93429abc06eebcd0204552486ab393fb",
+                "operationId": "3cf0a2f93f57e1f31839df8d5cfccf15",
                 "parameters": [
                     {
                         "name": "id",
@@ -148,10 +148,6 @@
                                     "amount": {
                                         "description": "Jumlah pengeluaran",
                                         "type": "number"
-                                    },
-                                    "description": {
-                                        "description": "Deskripsi pengeluaran",
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"

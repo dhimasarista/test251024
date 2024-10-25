@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class ExpenseApprovalTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
     public function test_expense_approval_flow()
     {
@@ -24,8 +24,8 @@ class ExpenseApprovalTest extends TestCase
         }
 
         // 2. Buat status 'menunggu persetujuan' dan 'disetujui'
-        $waitingStatus = Status::create(['name' => 'menunggu persetujuan']);
-        $approvedStatus = Status::create(['name' => 'disetujui']);
+        Status::create(['name' => 'menunggu persetujuan']);
+        Status::create(['name' => 'disetujui']);
 
         // 3. Buat 3 tahap approval menggunakan endpoint
         foreach ($approverIds as $approverId) {
@@ -44,7 +44,7 @@ class ExpenseApprovalTest extends TestCase
             $response->assertStatus(201);
             $expenses[] = $response->json('id');
         }
-        
+
 
         // 5. Proses approval untuk setiap pengeluaran
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\ApproveExpenseRequest;
 use App\Services\ExpenseService;
+use Exception;
 use Illuminate\Http\JsonResponse;
 
 class ExpenseController extends Controller
@@ -26,7 +27,6 @@ class ExpenseController extends Controller
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="amount", type="number", description="Jumlah pengeluaran"),
-     *             @OA\Property(property="description", type="string", description="Deskripsi pengeluaran")
      *         )
      *     ),
      *     @OA\Response(response=201, description="Pengeluaran berhasil ditambahkan"),
@@ -65,8 +65,14 @@ class ExpenseController extends Controller
      */
     public function approveExpense($id, ApproveExpenseRequest $request): JsonResponse
     {
-        $expense = $this->expenseService->approveExpense($id, $request->validated());
-        return response()->json($expense, 200);
+        try {
+            $expense = $this->expenseService->approveExpense($id, $request->validated());
+            return response()->json($expense, 200);
+        } catch (Exception $e) {
+            return response()->json([
+                "message" => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
